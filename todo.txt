@@ -1,0 +1,41 @@
+🛡️ Défense TB
+
+Normalement pour la soutenance, faut parler de ces points:
+
+a) le sujet qu’il vous a été demandé de traiter
+b) comment a été abordé et résolu le problème
+c) quelles sont les conclusions au terme du travail 
+d) si le cahier des charges est rempli.
+
+J'avais résumé comme ça:
+
+Contexte
+* Baleinev, PMW -> trop libre -> r/place -> BeePlace
+* Lien avec BeeScreens
+
+Problèmes à résoudre
+* Identification des utilisateurs (délai)
+* Utilisation mobile
+* Mode affichage
+* Montée en charge
+
+Solutions
+* App Next, Nest, Package TypeScript
+* Stockage: Redis / PostgreSQL
+* Fingerprint
+* Déploiement: docker, docker-compose
+* Montée en charge et optimisations: k6, Clinic.js
+
+Conclusion
+* App fonctionnelle et déployée
+* Technologies ont été bien choisies, pas de blocage
+* Optimisations concluantes, permet de tenir tous les festivaliers
+* Personnelle: projet qui m’a bcp apporté, créé qqch de A à Z est satisfaisant
+
+Perspectives futures
+* Baleinev 2024
+* Lier monde physique (régler problèmes d’authentification, QRCode sur billet ? Ou numéro ?)
+* Dashboard admin
+* Stats
+
+Genre sous ces 4 catégories, vous écrivez quelques phrases ou idées de schéma à mettre dans la présentation. Comme ça vous vous vider la tête et vous êtes tranquille jusqu'à ce que vous vous y mettiez à fond
