@@ -171,8 +171,33 @@ Si on modère, il perd son temps et doit tout recommencer.
 -->
 
 ---
+layout: two-cols
+---
 
-# 2. Montée en charge
+# 2. Application web
+
+Contraintes externes
+
+<br>
+
+* Utilisée principalement sur smartphone
+* Optimisation pour ce médium
+* (Taille écran, utilisation tactile, etc.)
+
+<br>
+<br>
+
+* Diffusion sur les murs de l'école
+* Mode affichage nécessaire
+* Séparer l'affichage entre plusieurs écrans
+
+::right::
+
+<img src="/heig-screens.png" class=""/>
+
+---
+
+# 3. Montée en charge
 
 TODO
 
