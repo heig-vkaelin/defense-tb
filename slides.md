@@ -36,6 +36,7 @@ layout: two-cols
 - Problèmes à résoudre
 - Solutions
 - Conclusion
+- Démonstration
 
 ::right::
 
@@ -66,8 +67,8 @@ Association Baleinev
 
 ::right::
 
-<img src="/pmw.jpg" class="mt-0"/>
-<p class="text-sm">Crédits: Antoine Kaelin</p>
+<img src="/pmw.jpg" class="mt-24"/>
+<p class="text-sm text-gray-700 dark:text-gray-300 italic">Crédits: Antoine Kaelin</p>
 
 <!-- 
 Permet aux festivaliers de dessiner en temps réel sur les murs de l'école.
@@ -209,6 +210,7 @@ Contraintes externes
 ::right::
 
 <img src="/heig-screens.png" class=""/>
+<p class="text-sm text-gray-700 dark:text-gray-300 italic">Crédits: Kevin Pradervand</p>
 
 ---
 layout: two-cols
@@ -254,8 +256,6 @@ layout: two-cols
 
 Pour limiter la fréquence d'ajout de pixels
 
-<br>
-
 * Plus simple possible pour les festivaliers
 * Sans nuire à la fluidité de l'expérience
 
@@ -266,6 +266,12 @@ Pour limiter la fréquence d'ajout de pixels
 * Authentification par empreinte digitale (fingerprint)
 * Librairie FingerprintJS (open source)
 
+<br>
+
+**Problème**
+
+* Risque de collisions
+
 ::right::
 
 <img src="/fingerprint.png" class="mt-20 absolute -right-15"/>
@@ -274,19 +280,149 @@ Pour limiter la fréquence d'ajout de pixels
 Pas possible d'utiliser des comptes classiques: trop long
 
 Même si connexion via Google ou autre réseau
+
+Problème de collisions car librairire free (env 60% d'accuracy), sur un petit dataset aucune collision trouvée (10-20 personnes).
+Problème si collision: temps d'attente partagé
+
+Solution: on verra plus tard dans la conclusions
 -->
 
 --- 
+
+# Frontend
+
+TODO
+
+
+--- 
+
+# Backend
+
+TODO
+
+---
+layout: two-cols 
+---
+
+# Stockage
+
+<br>
+<br>
+
+**3 niveaux de stockage:**
+
+1. Dans la mémoire de l'application
+2. Bitfield Redis
+3. Base de données PostgreSQL
+
+::right::
+
+Structure du Bitfield Redis:
+
+<img src="bitfield-redis.png"/>
+
+<p class="text-sm text-gray-700 dark:text-gray-300 italic !mt-0">Crédits: Daniel Ellis (Reddit)</p>
+
+Structure SQL:
+<img src="sql-pixels-table.png" class="w-55"/>
+
+<!--
+
+Bitfield Redis: parler du schéma
+
+Pourquoi aussi en mémoire ? Profling: bitfield (string) -> tableau JS couteux
+
+=> Redis utilisé lorsque l'app redémarre ou que l'on change la config
+
+Base de données SQL pas encore utilisée, que pour l'historique de tous les pixels.
+Pour de futures statistiques, j'en parlerai dans les perspectives futures
+-->
+
+---
 
 # Déploiement
 
 TODO
 
---- 
+---
+layout: two-cols 
+---
 
 # Montée en charge
 
-TODO
+<div class="flex items-baseline space-x-8 mb-4">
+  <strong>Outils utilisés</strong>
+  <div class="flex items-baseline space-x-3">
+    <img src="/logos/k6.png" class="w-12"/>
+    <img src="/logos/clinicjs.png" class="w-12"/>
+  </div>
+</div>
+
+* k6 pour les tests de montée en charge
+* Clinic.js pour le profiling
+  * Graphiques en flammes
+
+<br>
+
+**Résultats initiaux des tests**
+
+* Utilisateurs virtuels : **558**
+* Pixels dessinés : **1017**
+
+::right::
+
+<img src="/appendix/flame3-getBoard.png" class="mt-20"/>
+
+<!--
+Déployée sur une seconde VM de l'école pour les tests
+
+k6: permet de créer des tests en JS/TS
+Pas possible d'utiliser Socket.IO de base => module créé
+
+Breakpoint Test: crée des users virtuels qui se connectent et dessinent sur la toile (3 pixels chacun)
+Jusqu'à ce que la latence soit supérieure à 1.2s
+
+
+Clinic.js: plusieurs outils dispos mais utilisé le flame pour le profiling
+
+Faut lancer clinic puis lancer l'app, lancer les tests et ensuite stopper l'app pour avoir le graph
+-->
+
+---
+layout: two-cols
+---
+
+# Optimisations
+
+<br>
+
+* Broadcast des pixels avec un intervalle de temps
+* Format plus léger pour l'envoi des pixels
+* Cache du Bitfield Redis en mémoire
+* Configuration de l'OS Linux
+
+<br>
+
+**Résultats finaux**
+
+* Utilisateurs virtuels : **1348.5** (<span class="text-green-600 font-semibold">+ 141.67%</span>)
+* Pixels dessinés : **3078.5** (<span class="text-green-600 font-semibold">+ 202.70%</span>)
+
+::right::
+
+<img src="/opti-users.png" class="w-80"/>
+<img src="/opti-pixels.png" class="w-80 mt-10"/>
+
+<!--
+— Optimisation du broadcast des pixels avec un intervalle de temps ;
+— Utilisation d’un format sous forme de chaîne de caractères plus léger que le JSON pour
+envoyer les pixels ;
+— Mise en cache du Bitfield Redis dans la mémoire de l’application ;
+— Installation de dépendances optionnelles pour Socket.IO permettant d’accélérer certaines
+opérations ;
+— Optimisation de la configuration du système d’exploitation Linux (nombre maximal de
+fichiers ouverts en simultané).
+-->
 
 
 ---
@@ -354,6 +490,21 @@ supprimées.
 -->
 
 ---
+layout: iframe-right
+url: https://place.beescreens.ch/
+---
+
+# Démonstration
+
+<br>
+
+Venez placer vos pixels !
+
+[place.beescreens.ch](https://place.beescreens.ch)
+
+<img src="/qrcode.png" class="w-[250px] -ml-4"/>
+
+---
 layout: cover
 background: baleinev-2023.png
 ---
@@ -377,3 +528,30 @@ layout: two-cols
 ::right::
 
 <img src="/undraw_Landscape_photographer.png" class="mt-10"/>
+
+---
+layout: cover
+background: baleinev-2023.png
+---
+
+# Annexes
+
+---
+layout: image
+image: appendix/display-mode-config.png
+---
+
+---
+layout: image
+image: appendix/display-mode-example.png
+---
+
+---
+layout: two-cols
+---
+
+<img src="/appendix/sequence-websockets-connection.svg" class="mt-32 absolute -left-10"/>
+
+::right::
+
+<img src="/appendix/sequence-websockets-pixels.svg" class="mt-28 absolute -right-10"/>
