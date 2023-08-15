@@ -319,12 +319,12 @@ layout: two-cols
 
 Structure du Bitfield Redis:
 
-<img src="bitfield-redis.png"/>
+<img src="/bitfield-redis.png"/>
 
 <p class="text-sm text-gray-700 dark:text-gray-300 italic !mt-0">Crédits: Daniel Ellis (Reddit)</p>
 
 Structure SQL:
-<img src="sql-pixels-table.png" class="w-55"/>
+<img src="/sql-pixels-table.png" class="w-55"/>
 
 <!--
 
