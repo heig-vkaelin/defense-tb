@@ -31,6 +31,7 @@ layout: two-cols
 # Sommaire
 
 <br>
+<br>
 
 - Contexte
 - Problèmes à résoudre
@@ -40,7 +41,7 @@ layout: two-cols
 
 ::right::
 
-<img src="/undraw_Random_thoughts.png" class="mt-10"/>
+<img src="/undraw_Random_thoughts.png" class="mt-16"/>
 
 ---
 layout: cover
@@ -268,9 +269,10 @@ Pour limiter la fréquence d'ajout de pixels
 
 <br>
 
-**Problème**
+**Problèmes**
 
 * Risque de collisions
+* Possibilité de bots (générée côté client)
 
 ::right::
 
@@ -283,22 +285,80 @@ Même si connexion via Google ou autre réseau
 
 Problème de collisions car librairire free (env 60% d'accuracy), sur un petit dataset aucune collision trouvée (10-20 personnes).
 Problème si collision: temps d'attente partagé
+Bot: envoyer une fingerprint différente / random à chaque requête
 
 Solution: on verra plus tard dans la conclusions
 -->
 
---- 
+---
+layout: two-cols
+---
 
 # Frontend
 
-TODO
+<br>
+
+**Next.js**
+
+* Canvas HTML5
+* Connexion WebSockets avec Socket.IO
+* Stockage de l'état dans un state global
+* PinchZoom du canvas
+* Mode affichage
+
+<br>
+
+**Design**
+* Utilisation de TailwindCSS
 
 
---- 
+
+::right::
+
+<img src="/screenshot-app.png" class="w-50 absolute right-22 -top-8"/>
+<img src="/appendix/display-mode-config.png" class="w-90 absolute right-0 mt-65"/>
+
+<!--
+State global: Zustand
+
+TailwindCSS: utilitaire de classes CSS (design system)
+Pas bcp de design à faire donc tout custom
+-->
+
+---
+layout: two-cols
+class: backend
+---
 
 # Backend
 
-TODO
+**Nest.js**
+
+* Architecture DDD
+* ORM Prisma (PostgreSQL)
+* Configuration par variables d'environnement
+
+
+**Administration**
+
+* Endpoints HTTP protégés
+* Stratégie d'API Key
+* Actions:
+  * Read only
+  * Remise à zéro de la toile
+  * Recouvrir une zone de pixels
+
+::right::
+
+<img src="/backend-architecture.png" class="w-64 absolute right-10 mt-20"/>
+
+<!---
+DDD: Domain Driven Design, découpage par domaine
+ORM: Object Relational Mapping, permet de manipuler la base de données comme des objets
+
+Config: env var avant le futur dashboard
+Exs: taille du canvas, couleurs, nombre de pixels que l'utilisateur peut poser, etc.
+-->
 
 ---
 layout: two-cols 
@@ -338,11 +398,13 @@ Base de données SQL pas encore utilisée, que pour l'historique de tous les pix
 Pour de futures statistiques, j'en parlerai dans les perspectives futures
 -->
 
----
+<!-- TODO: voir si un slide sur le package est nécessaire ici -->
+
+<!-- ---
 
 # Déploiement
 
-TODO
+TODO -->
 
 ---
 layout: two-cols 
@@ -434,16 +496,69 @@ background: baleinev-2023.png
 
 
 ---
+layout: two-cols
+---
 
 # Conclusion technique
 
-TODO
+<br>
 
+**Objectifs**
+
+✅ Fonctionnalités _required_ et _essential_
+
+✅ Moitié des fonctionnalités _nice to have_
+
+✅ Fonctionnalités non prévues:  
+  <ul class="ml-5">
+    <li>Mode affichage plus poussé</li>
+    <li>Package pour partager le code</li>
+    <li>Historique dans la base de données SQL</li>
+  </ul>
+
+::right::
+
+<br>
+<br>
+<br>
+
+**Retour d'expérience**
+
+* Application fonctionnelle et déployée
+* Technologies bien choisies, aucun réel blocage
+* Optimisations concluantes, permet de tenir tous les festivaliers 🕺💃
+
+**Améliorations possibles**
+
+* Accessibilité de l'app:
+  * Tutoriel, textes informatifs
+  * Internationalisation
+* Tests unitaires et d'intégration
+
+---
+layout: two-cols
 ---
 
 # Conclusion personnelle
 
-TODO
+* Projet qui me tient à coeur
+* Bénéfices de réaliser un projet plus long et conséquent
+* Retours lors du Baleinev Festival 2023 encourageants
+
+**Organisationnel**
+
+* Travail seul sur un projet mais au sein d'une équipe 
+* Review du code bénéfique, permet d'améliorer la qualité
+* Bonnes pratiques du monde professionnel (daily meeting, sprint review, ...)
+
+::right::
+
+<img src="/beescreens-team.png" class="mt-20"/>
+
+<!--
+Chance d'avoir travaillé sur un projet qui me passionne, c'était un plaisir d'ajouter petits à petits des fonctionnalités.
+
+-->
 
 
 ---
@@ -466,6 +581,7 @@ layout: two-cols
 
 * Dashboard d'administration
 * Statistiques
+* Toile rectangulaire
 
 ::right::
 
