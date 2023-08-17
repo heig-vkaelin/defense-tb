@@ -56,11 +56,10 @@ background: baleinev-2023.png
 ---
 layout: image-right
 image: pmw.jpg
+class: col-padding no-subtitle
 ---
 
 # Baleinev Festival
-
-<br>
 
 **Association Baleinev**
 
@@ -71,6 +70,11 @@ image: pmw.jpg
 * Nouveau concept depuis 2014 : Pimp My Wall
 * Application de dessin collaboratif
 
+**Depuis 2018**
+* BeeScreens: nouvelle version open source
+* Collection d'applications interactives
+* Cadre pouvant sortir du festival
+
 <!-- 
 Permet aux festivaliers de dessiner en temps réel sur les murs de l'école.
 
@@ -79,43 +83,10 @@ Collaboration
 Site donc accessible depuis leur smartphone
 
 Utilisation d'écrans / de projecteurs.
--->
 
----
-layout: two-cols 
----
-
-# BeeScreens
-
-<br>
-
-**Depuis 2018**
-
-* Nouvelle version open source
-* Collection d'applications interactives
-  * Faciliter l'ajout de nouvelles applications
-* Cadre pouvant sortir du festival
-
-::right::
-
-<img src="/gitlab.png" class="w-30 pl-12 mb-10"/>
-
-```plantuml {scale: 0.7}
-@startuml
-
-package "BeeScreens" {
-  [Pimp My Wall]
-  [Media Player]
-  [BeePlace]
-  [Any other app ...]
-}
-@enduml
-```
-
-<!--
-Volonté d'utiliser des technologies modernes
-
-Ajout d'une nouvelle app le plus simple possible -> idée de ce TB
+BeeScreens: 
+- Volonté d'utiliser des technologies modernes
+- Ajout d'une nouvelle app le plus simple possible -> idée de ce TB
 -->
 
 ---
@@ -184,6 +155,10 @@ Encourage la collaboration
 
 Occasionnel pendant une courte période (2017, 2022 et 2023) ⇒ forte rivalité
 
+<br>
+
+**↳ S'inspirer de r/place pour créer sa variante open source : BeePlace**
+
 ::right::
 
 <img src="/rplace.png" class=""/>
@@ -201,20 +176,21 @@ Utilisateurs peuvent choisir la couleur parmis une palette définie
 
 ---
 layout: two-cols
+class: no-subtitle
 ---
 
-# Application web
+# Contexte physique
 
-Contraintes externes
+**Les festivaliers**
 
-<br>
-
-* Utilisée principalement sur smartphone
+* Festivaliers utilisent leur propre matériel 
+* ⇒ Utilisée principalement sur smartphone
 * Optimisation pour ce médium
 * (Taille écran, utilisation tactile, etc.)
 
 <br>
-<br>
+
+**La HEIG-VD**
 
 * Diffusion sur les murs de l'école
 * Mode affichage nécessaire
@@ -227,25 +203,37 @@ Contraintes externes
 
 ---
 layout: two-cols
+class: no-subtitle
 ---
 
-# Montée en charge
+<h1 class="whitespace-nowrap">
+  Garantir le fonctionnement de l’application <br>lors du festival
+</h1>
 
-<br>
-<br>
+Assurer la scalabilité
 
-* Assurer la scalabilité
-* Pouvoir gérer un nombre élevé d'utilisateurs simultanés:
-  * Pics de fréquentation lors du festival
-* Garder une latence faible (bonne UX)
+Garder une latence faible (bonne UX)
 
+Pouvoir gérer un nombre élevé d'utilisateurs simultanés
+
+Pics de fréquentation lors du festival
+
+<div class="spacer"/>
+
+**Ordre de grandeur**
+
+| Reddit                        | Baleinev Festival |
+|-------------------------------|-------------------|
+| 10.5 millions de participants | 1500 festivaliers |
 
 ::right::
 
-<img src="/undraw_stepping_up.png" class="mt-10"/>
+<img src="/undraw_stepping_up.png" class="mt-20 absolute -right-12"/>
 
 <!--
 Latence faible: assurer une bonne UX
+
+1500 festivaliers max => prévoire au minimum quelques centaines d'utilisateurs simultanés
 -->
 
 ---
@@ -253,8 +241,39 @@ layout: cover
 background: baleinev-2023.png
 ---
 
-# Solutions
+# Conception et réalisation
 
+---
+layout: two-cols
+---
+
+# Besoins de l'application
+
+<br>
+<br>
+
+**Fonctionnalités**
+
+* Temps réel
+* Stocker les pixels
+* Interface pour naviguer dans le canvas
+* Identifier les utilisateurs
+
+::right::
+
+<img src="/undraw_Scrum_board.png" class="mt-18"/>
+
+<!--
+Temps réel: pour la pose de pixels et les pixels des autres utilisateurs
+
+Stockage des pixels: pour l'état de la toile
+
+Interface: pour naviguer dans le canvas: application web optimisée pour le mobile
+
+Identifier les users: pour limiter la fréquence de pose de pixels (vérifier le temps d'attente)
+
+Pour répondre à ces besoins, je suis arrivé à la stack suivante (slide suivante)
+-->
 ---
 
 # Technologies
@@ -301,38 +320,63 @@ Solution: on verra plus tard dans la conclusions
 -->
 
 ---
-layout: two-cols
+
+# Canvas
+
+TODO
+
+<!-- 
+Structure de données, comment faire pour que ce soit performant -> slide suivant 
+-->
+
+---
+layout: two-cols 
+class: no-subtitle
 ---
 
-# Frontend
+# Stockage
 
-<br>
+**3 niveaux de stockage**
 
-**Next.js**
+1. Dans la mémoire de l'application
+2. Bitfield Redis
+3. Base de données PostgreSQL
 
-* Canvas HTML5
-* Connexion WebSockets avec Socket.IO
-* Stockage de l'état dans un state global
-* PinchZoom du canvas
-* Mode affichage
+<div class="spacer"/>
 
-<br>
+**Quoi stocker ?**
 
-**Design**
-* Utilisation de TailwindCSS
+La position et la couleur de chaque pixel
 
+<div class="spacer"/>
 
+**Bitfield Redis**
+
+Permet de ne stocker que la couleur
+
+La position est implicite
 
 ::right::
 
-<img src="/screenshot-app.png" class="w-50 absolute right-22 -top-8"/>
-<img src="/appendix/display-mode-config.png" class="w-90 absolute right-0 mt-65"/>
+Structure du Bitfield Redis:
+
+<img src="/bitfield-redis.png"/>
+
+<p class="text-sm text-gray-700 dark:text-gray-300 italic !mt-0">Crédits: Daniel Ellis (Reddit)</p>
+
+Structure SQL:
+<img src="/sql-pixels-table.png" class="w-55"/>
 
 <!--
-State global: Zustand
 
-TailwindCSS: utilitaire de classes CSS (design system)
-Pas bcp de design à faire donc tout custom
+Bitfield Redis: parler du schéma
+
+Pourquoi aussi en mémoire ? Profling: bitfield (string) -> tableau JS couteux
+
+=> Redis utilisé lorsque l'app redémarre ou que l'on change la config
+
+Base de données SQL pas encore utilisée, que pour l'historique de tous les pixels.
+Pour de futures statistiques, j'en parlerai dans les perspectives futures
 -->
 
 ---
@@ -371,50 +415,36 @@ Exs: taille du canvas, couleurs, nombre de pixels que l'utilisateur peut poser, 
 -->
 
 ---
-layout: two-cols 
+layout: two-cols
 ---
 
-# Stockage
+# Frontend
 
 <br>
+
+**Next.js**
+
+* Canvas HTML5
+* Connexion WebSockets avec Socket.IO
+* Stockage de l'état dans un state global
+* PinchZoom du canvas
+* Mode affichage
+
 <br>
 
-**3 niveaux de stockage:**
-
-1. Dans la mémoire de l'application
-2. Bitfield Redis
-3. Base de données PostgreSQL
+**Design**
+* Utilisation de TailwindCSS
 
 ::right::
 
-Structure du Bitfield Redis:
-
-<img src="/bitfield-redis.png"/>
-
-<p class="text-sm text-gray-700 dark:text-gray-300 italic !mt-0">Crédits: Daniel Ellis (Reddit)</p>
-
-Structure SQL:
-<img src="/sql-pixels-table.png" class="w-55"/>
+<img src="/screenshot-app.png" class="w-90 absolute right-0 -top-8"/>
 
 <!--
+State global: Zustand
 
-Bitfield Redis: parler du schéma
-
-Pourquoi aussi en mémoire ? Profling: bitfield (string) -> tableau JS couteux
-
-=> Redis utilisé lorsque l'app redémarre ou que l'on change la config
-
-Base de données SQL pas encore utilisée, que pour l'historique de tous les pixels.
-Pour de futures statistiques, j'en parlerai dans les perspectives futures
+TailwindCSS: utilitaire de classes CSS (design system)
+Pas bcp de design à faire donc tout custom
 -->
-
-<!-- TODO: voir si un slide sur le package est nécessaire ici -->
-
-<!-- ---
-
-# Déploiement
-
-TODO -->
 
 ---
 layout: two-cols 
@@ -422,7 +452,7 @@ layout: two-cols
 
 # Montée en charge
 
-<div class="flex items-baseline space-x-8 mb-4">
+<div class="flex items-baseline space-x-8 mb-2 -mt-3">
   <strong>Outils utilisés</strong>
   <div class="flex items-baseline space-x-3">
     <img src="/logos/k6.png" class="w-12"/>
@@ -431,54 +461,65 @@ layout: two-cols
 </div>
 
 * k6 pour les tests de montée en charge
-* Clinic.js pour le profiling
-  * Graphiques en flammes
+* Clinic.js pour le profiling (flame graph)
+* Métriques (avant que la latence soit `> 1.2s`):
+  * Nombre d'utilisateurs virtuels
+  * Nombre de pixels dessinés
+
+<div class="mt-4 mb-2">
+  <strong>Méthodologie</strong>
+</div>
+
+  1. Récupérer les résultats avant optimisations
+  2. Optimiser avec Clinic.js localement
+  3. Déployer sur la machine virtuelle de l’école
+  4. Lancer les tests avec k6
+  5. Comparer les résultats des tests avec les initiaux
 
 <br>
 
-**Résultats initiaux des tests**
-
-* Utilisateurs virtuels : **558**
-* Pixels dessinés : **1017**
-
 ::right::
 
-<img src="/appendix/flame3-getBoard.png" class="mt-20"/>
+<img src="/k6-report.png" class="-mt-6 rounded-lg"/>
+
+<img src="/appendix/flame3-getBoard.png" class="mt-4 rounded-lg"/>
 
 <!--
 Déployée sur une seconde VM de l'école pour les tests
 
 k6: permet de créer des tests en JS/TS
+Test créé: test websocket qui simule les événements d'un client et écoute les réponses
 Pas possible d'utiliser Socket.IO de base => module créé
 
 Breakpoint Test: crée des users virtuels qui se connectent et dessinent sur la toile (3 pixels chacun)
 Jusqu'à ce que la latence soit supérieure à 1.2s
-
+Latence: temps de la connexion WebSockets (temps avant de recevoir le board avec les pixels etc)
 
 Clinic.js: plusieurs outils dispos mais utilisé le flame pour le profiling
-
 Faut lancer clinic puis lancer l'app, lancer les tests et ensuite stopper l'app pour avoir le graph
 -->
 
 ---
 layout: two-cols
+class: no-subtitle
 ---
 
-# Optimisations
+# Résultats
 
-<br>
+**Résultats initiaux**
+* Utilisateurs virtuels : **558**
+* Pixels dessinés : **1017**
 
+**Résultats finaux**
+* Utilisateurs virtuels : **1348.5** (<span class="text-green-600 font-semibold">+ 141.67%</span>)
+* Pixels dessinés : **3078.5** (<span class="text-green-600 font-semibold">+ 202.70%</span>)
+
+
+**Optimisations**
 * Broadcast des pixels avec un intervalle de temps
 * Format plus léger pour l'envoi des pixels
 * Cache du Bitfield Redis en mémoire
 * Configuration de l'OS Linux
-
-<br>
-
-**Résultats finaux**
-
-* Utilisateurs virtuels : **1348.5** (<span class="text-green-600 font-semibold">+ 141.67%</span>)
-* Pixels dessinés : **3078.5** (<span class="text-green-600 font-semibold">+ 202.70%</span>)
 
 ::right::
 

@@ -25,10 +25,14 @@ ul {
   list-style-type: '- ' !important;
 }
 
-.col-padding.col-left {
+.col-padding {
   padding-right: 1rem;
 }
 
 .spacer {
   height: 2px;
+}
+
+code:before, code:after {
+  content: '\00a0 ' !important;
 }
