@@ -13,6 +13,8 @@ drawings:
   persist: false
 transition: slide-left
 title: BeePlace
+fonts:
+  sans: 'Roboto'
 ---
 
 # Soutenance du TB
@@ -34,8 +36,9 @@ layout: two-cols
 <br>
 
 - Contexte
-- Problèmes à résoudre
-- Solutions
+- Problématique
+- Solution et contraintes
+- Conception et réalisation
 - Conclusion
 - Démonstration
 
@@ -51,25 +54,22 @@ background: baleinev-2023.png
 # Contexte
 
 ---
-layout: two-cols 
+layout: image-right
+image: pmw.jpg
 ---
 
 # Baleinev Festival
 
-Association Baleinev
+<br>
+
+**Association Baleinev**
 
 * À la HEIG-VD
 * Festival de musique depuis près de 30 ans
+
+**Pimp My Wall**
 * Nouveau concept depuis 2014 : Pimp My Wall
-  * Application de dessin collaboratif
-
-<img src="/pmw-app.png" class="w-55 pl-6"/>
-
-
-::right::
-
-<img src="/pmw.jpg" class="mt-24"/>
-<p class="text-sm text-gray-700 dark:text-gray-300 italic">Crédits: Antoine Kaelin</p>
+* Application de dessin collaboratif
 
 <!-- 
 Permet aux festivaliers de dessiner en temps réel sur les murs de l'école.
@@ -79,9 +79,7 @@ Collaboration
 Site donc accessible depuis leur smartphone
 
 Utilisation d'écrans / de projecteurs.
-
- -->
-
+-->
 
 ---
 layout: two-cols 
@@ -89,10 +87,9 @@ layout: two-cols
 
 # BeeScreens
 
-Depuis 2018
+<br>
 
-<br>
-<br>
+**Depuis 2018**
 
 * Nouvelle version open source
 * Collection d'applications interactives
@@ -122,64 +119,38 @@ Ajout d'une nouvelle app le plus simple possible -> idée de ce TB
 -->
 
 ---
-layout: two-cols
----
-
-# r/place
-
-reddit.com
-
-<br>
-<br>
-
-* Concept proposé par Reddit
-* Toile partagée
-* 1 pixel par personne toutes les 5 minutes
-* Encourage la collaboration
-
-::right::
-
-<img src="/rplace.png" class=""/>
-<p class="text-sm">Résultat du r/place de 2022</p>
-
-<!--
-Reddit: plus grand forum au monde
-
-r/place en 2017 puis 2022 et récemment 2023 (mois passé)
-
-Utilisateurs peuvent choisir la couleur
--->
-
----
 layout: cover
 background: baleinev-2023.png
 ---
 
-# Problèmes à résoudre
+# Problématique
 
 ---
 layout: two-cols
 ---
 
-# 1. Liberté de Pimp My Wall
+# Liberté de Pimp My Wall
 
 <br>
 
-* Débordements en fin de soirée (oeuvres inappropriées)
-* Modération difficile et chronophage
+Débordements en fin de soirée (oeuvres inappropriées)
+
+<div class="spacer"/>
+
+Modération difficile et chronophage
+
+<div class="spacer"/>
+
+Affecte les autres utilisateurs: gâche les dessins
 
 <br>
+<br>
 
-**Solutions:**
-
-* Concept du r/place
-* Temps d'attente entre chaque pixel
-  * Besoin d'identifier les utilisateurs
-* Modération plus efficace
+**↳ Expérience frustrante pour nous et les festivaliers**
 
 ::right::
 
-<img src="/pmw-debordement.png" class="w-80 absolute right-0"/>
+<img src="/pmw-debordement.png" class="w-full absolute -right-10 -mt-10"/>
 
 <!--
 Même si l'utilisateur veut dessiner qqch d'inapproprié, cela lui prend du temps.
@@ -188,10 +159,51 @@ Si on modère, il perd son temps et doit tout recommencer.
 -->
 
 ---
+layout: cover
+background: baleinev-2023.png
+---
+
+# Solution et contraintes
+
+---
+layout: two-cols
+class: no-subtitle col-padding
+---
+
+# Solution
+
+**r/place de Reddit**
+
+<div class="spacer"/>
+
+Toile partagée par des millions d'utilisateurs
+
+1 pixel par personne toutes les 5 minutes
+
+Encourage la collaboration
+
+Occasionnel pendant une courte période (2017, 2022 et 2023) ⇒ forte rivalité
+
+::right::
+
+<img src="/rplace.png" class=""/>
+<p class="text-sm">Résultat du r/place de 2022</p>
+
+<!--
+Solution: s'inspirer du concept de r/place de Reddit
+
+Reddit: plus grand forum au monde
+
+r/place en 2017 puis 2022 et récemment 2023 (mois passé)
+
+Utilisateurs peuvent choisir la couleur parmis une palette définie
+-->
+
+---
 layout: two-cols
 ---
 
-# 2. Application web
+# Application web
 
 Contraintes externes
 
@@ -217,7 +229,7 @@ Contraintes externes
 layout: two-cols
 ---
 
-# 3. Montée en charge
+# Montée en charge
 
 <br>
 <br>
@@ -247,7 +259,7 @@ background: baleinev-2023.png
 
 # Technologies
 
-<img src="/technos.png" class="w-[94%] -mt-3"/>
+<img src="/technos.png" class="-mt-4"/>
 
 ---
 layout: two-cols 
@@ -255,19 +267,17 @@ layout: two-cols
 
 # Identification
 
-Pour limiter la fréquence d'ajout de pixels
+<br>
+
+**Pour limiter la fréquence d'ajout de pixels**
 
 * Plus simple possible pour les festivaliers
 * Sans nuire à la fluidité de l'expérience
 
-<br>
-
-**Solution:**
+**Solution**
 
 * Authentification par empreinte digitale (fingerprint)
 * Librairie FingerprintJS (open source)
-
-<br>
 
 **Problèmes**
 
@@ -327,7 +337,7 @@ Pas bcp de design à faire donc tout custom
 
 ---
 layout: two-cols
-class: backend
+class: no-subtitle
 ---
 
 # Backend
@@ -497,36 +507,37 @@ background: baleinev-2023.png
 
 ---
 layout: two-cols
+class: no-subtitle
 ---
 
 # Conclusion technique
 
-<br>
-
-**Objectifs**
+**Cahier des charges**
 
 ✅ Fonctionnalités _required_ et _essential_
 
 ✅ Moitié des fonctionnalités _nice to have_
 
-✅ Fonctionnalités non prévues:  
-  <ul class="ml-5">
-    <li>Mode affichage plus poussé</li>
-    <li>Package pour partager le code</li>
-    <li>Historique dans la base de données SQL</li>
-  </ul>
+✅ Fonctionnalités non prévues
+
+<br>
+
+**Objectifs accomplis (Baleinev 2023)**
+
+* Moins de débordements
+* Plus de collaboration
+* Expérience plus positive que Pimp My Wall
 
 ::right::
 
-<br>
-<br>
-<br>
+<div class="h-[48px]"/>
 
 **Retour d'expérience**
 
 * Application fonctionnelle et déployée
 * Technologies bien choisies, aucun réel blocage
 * Optimisations concluantes, permet de tenir tous les festivaliers 🕺💃
+* Apprentissages utiles pour le futur
 
 **Améliorations possibles**
 
@@ -535,11 +546,26 @@ layout: two-cols
   * Internationalisation
 * Tests unitaires et d'intégration
 
+<!--
+Objectifs vérifiés: grâce au test réalisé lors du Baleinev 2023
+
+Fonctionnalités non prévues:
+  - Mode affichage plus poussé
+  - Package pour partager le code
+  - Historique dans la base de données SQL
+
+Apprentissages:
+  - Surtout aspect tests de montée en charge, profiling, et optimisation
+  - k6 bon outil à connaître, bcp utilisé
+-->
 ---
 layout: two-cols
+class: no-subtitle
 ---
 
 # Conclusion personnelle
+
+**Technique**
 
 * Projet qui me tient à coeur
 * Bénéfices de réaliser un projet plus long et conséquent
@@ -553,7 +579,7 @@ layout: two-cols
 
 ::right::
 
-<img src="/beescreens-team.png" class="mt-20"/>
+<img src="/beescreens-team.png" class="mt-29"/>
 
 <!--
 Chance d'avoir travaillé sur un projet qui me passionne, c'était un plaisir d'ajouter petits à petits des fonctionnalités.
@@ -563,6 +589,7 @@ Chance d'avoir travaillé sur un projet qui me passionne, c'était un plaisir d'
 
 ---
 layout: two-cols
+class: col-padding
 ---
 
 # Perspectives futures
@@ -572,8 +599,7 @@ layout: two-cols
 **Organisation**
 
 * Tests lors du Baleinev 2024
-* Lier le monde physique
-  * Résoudre les problèmes d'authentification 
+* Lier le monde physique pour résoudre les problèmes d'authentification
 
 <br>
 
@@ -585,13 +611,17 @@ layout: two-cols
 
 ::right::
 
-<img src="/ticket-baleinev.png" class="absolute right-0 mt-20 w-[90%]"/>
+<div class="absolute w-full h-full bg-black transform scale-[1.2] -right-10">
+</div>
+
+<img src="/ticket-baleinev.png" class="relative mt-29"/>
 
 <!--
 Baleinev 2024 -> BeePlace sur les tours et pas que sur des petits écrans du rez
 Plus grande échelle grâce au mode affichage
 
 Lier monde physique: QRCode sur billet ? Ou numéro unique ?
+Autre idée d’auth: borne de pixels, QR code à scanner qui te file une session de X minutes
 
 Dashboard admin: faciliter la modération
 Ex: sélectionner la zone à modérer
@@ -614,11 +644,11 @@ url: https://place.beescreens.ch/
 
 <br>
 
-Venez placer vos pixels !
+À vos pixels !
 
 [place.beescreens.ch](https://place.beescreens.ch)
 
-<img src="/qrcode.png" class="w-[250px] -ml-4"/>
+<img src="/qrcode.png" class="w-[250px] mx-auto mt-8"/>
 
 ---
 layout: cover
