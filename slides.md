@@ -320,12 +320,36 @@ Solution: on verra plus tard dans la conclusions
 -->
 
 ---
+layout: two-cols
+class: no-subtitle
+---
 
 # Canvas
 
-TODO
+<br>
+
+**Canvas HTML5**
+
+Permet d'afficher une image matricielle
+
+Représentation des pixels de la toile
+
+Possible de dessiner les pixels individuellement ou plusieurs d'un bloc
+
+<br>
+<br>
+
+**Mais comment stocker les pixels ? 🤔**
+
+::right::
+
+<img src="/load-test-result.png" class="rounded-md mt-20"/>
 
 <!-- 
+Canvas élément déjà existant en HTML5, afficher du contenu 2D ou 3D
+
+Bloc de pixels: tableaux Javascript
+
 Structure de données, comment faire pour que ce soit performant -> slide suivant 
 -->
 
@@ -391,12 +415,12 @@ class: no-subtitle
 * Architecture DDD
 * ORM Prisma (PostgreSQL)
 * Configuration par variables d'environnement
+* Communication avec les clients via Socket.IO
 
 
 **Administration**
 
-* Endpoints HTTP protégés
-* Stratégie d'API Key
+* Endpoints HTTP protégés (stratégie d'API Key)
 * Actions:
   * Read only
   * Remise à zéro de la toile
@@ -404,7 +428,20 @@ class: no-subtitle
 
 ::right::
 
-<img src="/backend-architecture.png" class="w-64 absolute right-10 mt-20"/>
+<br>
+<br>
+<br>
+
+**Événements Socket.IO**
+
+<div class="">
+  <img src="/backend-animation/1.png" class="absolute"/>
+  <v-clicks>
+    <img src="/backend-animation/2.png" class="absolute"/>
+    <img src="/backend-animation/3.png" class="absolute"/>
+    <img src="/backend-animation/4.png" class="absolute"/>
+  </v-clicks>
+</div>
 
 <!---
 DDD: Domain Driven Design, découpage par domaine
@@ -412,6 +449,9 @@ ORM: Object Relational Mapping, permet de manipuler la base de données comme de
 
 Config: env var avant le futur dashboard
 Exs: taille du canvas, couleurs, nombre de pixels que l'utilisateur peut poser, etc.
+
+Un des domaines, justement la gestion avec la communication temps réel (Socket.IO)
+Montrer l'animation du schéma
 -->
 
 ---
@@ -424,8 +464,7 @@ layout: two-cols
 
 **Next.js**
 
-* Canvas HTML5
-* Connexion WebSockets avec Socket.IO
+* Communication: se greffe aux WebSockets du Backend avec Socket.IO
 * Stockage de l'état dans un state global
 * PinchZoom du canvas
 * Mode affichage
@@ -444,6 +483,8 @@ State global: Zustand
 
 TailwindCSS: utilitaire de classes CSS (design system)
 Pas bcp de design à faire donc tout custom
+
+Parler de l'interface avec le screen
 -->
 
 ---
