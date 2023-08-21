@@ -14,7 +14,7 @@ drawings:
 transition: slide-left
 title: BeePlace
 fonts:
-  sans: 'Roboto'
+  sans: Roboto
 ---
 
 # Soutenance du TB
@@ -25,6 +25,7 @@ BeePlace - Recréer l'expérience collaborative du r/place de Reddit
   <span>Valentin Kaelin</span>
   <span>24.08.2023</span>
 </footer>
+
 
 ---
 layout: two-cols
@@ -45,6 +46,10 @@ layout: two-cols
 ::right::
 
 <img src="/undraw_Random_thoughts.png" class="mt-16"/>
+
+<!--
+Contexte: remettre le cadre de ce TB
+-->
 
 ---
 layout: cover
@@ -75,14 +80,10 @@ class: col-padding no-subtitle
 * Collection d'applications interactives
 * Cadre pouvant sortir du festival
 
-<!-- 
-Permet aux festivaliers de dessiner en temps réel sur les murs de l'école.
+<!--
+TB réalisé pour l'Assoc Baleinev
 
-Collaboration
-
-Site donc accessible depuis leur smartphone
-
-Utilisation d'écrans / de projecteurs.
+PMW: permet aux festivaliers de dessiner en temps réel sur les murs de l'école. / Collaboration
 
 BeeScreens: 
 - Volonté d'utiliser des technologies modernes
@@ -124,9 +125,9 @@ Affecte les autres utilisateurs: gâche les dessins
 <img src="/pmw-debordement.png" class="w-full absolute -right-10 -mt-10"/>
 
 <!--
-Même si l'utilisateur veut dessiner qqch d'inapproprié, cela lui prend du temps.
+Conclusions réalisées à propos de l'application PMW existante: trop permissive, trop grande liberté
 
-Si on modère, il perd son temps et doit tout recommencer.
+Modération difficile: même si on recouvre les dessins inappropriés, ils peuvent le refaire en quelques secondes
 -->
 
 ---
@@ -169,9 +170,11 @@ Solution: s'inspirer du concept de r/place de Reddit
 
 Reddit: plus grand forum au monde
 
-r/place en 2017 puis 2022 et récemment 2023 (mois passé)
-
 Utilisateurs peuvent choisir la couleur parmis une palette définie
+
+Avantage:
+Même si l'utilisateur veut dessiner qqch d'inapproprié, cela lui prend du temps.
+Si on modère, il perd son temps et doit tout recommencer.
 -->
 
 ---
@@ -231,9 +234,9 @@ Pics de fréquentation lors du festival
 <img src="/undraw_stepping_up.png" class="mt-20 absolute -right-12"/>
 
 <!--
-Latence faible: assurer une bonne UX
+Latence faible: assurer une bonne expérience utilisateur
 
-1500 festivaliers max => prévoire au minimum quelques centaines d'utilisateurs simultanés
+1500 festivaliers max => pouvoir tenir au minimum plusieurs centaines d'utilisateurs simultanés
 -->
 
 ---
@@ -280,8 +283,14 @@ Pour répondre à ces besoins, je suis arrivé à la stack suivante (slide suiva
 
 <img src="/technos.png" class="-mt-4"/>
 
+<!--
+Toute l'app en TypeScript (frontend, backend, package)
+
+Reviendrai plus en détails sur chaque brique, vue d'ensemble pour l'instant
+-->
+
 ---
-layout: two-cols 
+layout: two-cols
 ---
 
 # Identification
@@ -314,9 +323,10 @@ Même si connexion via Google ou autre réseau
 
 Problème de collisions car librairire free (env 60% d'accuracy), sur un petit dataset aucune collision trouvée (10-20 personnes).
 Problème si collision: temps d'attente partagé
+
 Bot: envoyer une fingerprint différente / random à chaque requête
 
-Solution: on verra plus tard dans la conclusions
+Solution: on verra plus tard dans les perspectives futures
 -->
 
 ---
@@ -443,7 +453,7 @@ class: no-subtitle
   </v-clicks>
 </div>
 
-<!---
+<!--
 DDD: Domain Driven Design, découpage par domaine
 ORM: Object Relational Mapping, permet de manipuler la base de données comme des objets
 
@@ -488,7 +498,7 @@ Parler de l'interface avec le screen
 -->
 
 ---
-layout: two-cols 
+layout: two-cols
 ---
 
 # Montée en charge
@@ -532,12 +542,14 @@ k6: permet de créer des tests en JS/TS
 Test créé: test websocket qui simule les événements d'un client et écoute les réponses
 Pas possible d'utiliser Socket.IO de base => module créé
 
+Clinic.js: 
+Plusieurs outils dispos mais utilisé le flame pour le profiling
+Faut lancer clinic puis lancer l'app, lancer les tests et ensuite stopper l'app pour avoir le graph
+
+Métriques:
 Breakpoint Test: crée des users virtuels qui se connectent et dessinent sur la toile (3 pixels chacun)
 Jusqu'à ce que la latence soit supérieure à 1.2s
 Latence: temps de la connexion WebSockets (temps avant de recevoir le board avec les pixels etc)
-
-Clinic.js: plusieurs outils dispos mais utilisé le flame pour le profiling
-Faut lancer clinic puis lancer l'app, lancer les tests et ensuite stopper l'app pour avoir le graph
 -->
 
 ---
@@ -568,16 +580,8 @@ class: no-subtitle
 <img src="/opti-pixels.png" class="w-80 mt-10"/>
 
 <!--
-— Optimisation du broadcast des pixels avec un intervalle de temps ;
-— Utilisation d’un format sous forme de chaîne de caractères plus léger que le JSON pour
-envoyer les pixels ;
-— Mise en cache du Bitfield Redis dans la mémoire de l’application ;
-— Installation de dépendances optionnelles pour Socket.IO permettant d’accélérer certaines
-opérations ;
-— Optimisation de la configuration du système d’exploitation Linux (nombre maximal de
-fichiers ouverts en simultané).
+Résultats concluants, permet de tenir l'ensemble des festivaliers simultanément (même si cela ne va sûrement pas arriver)
 -->
-
 
 ---
 layout: cover
@@ -629,17 +633,18 @@ class: no-subtitle
 * Tests unitaires et d'intégration
 
 <!--
-Objectifs vérifiés: grâce au test réalisé lors du Baleinev 2023
-
 Fonctionnalités non prévues:
   - Mode affichage plus poussé
   - Package pour partager le code
   - Historique dans la base de données SQL
 
+Objectifs vérifiés: grâce au test réalisé lors du Baleinev 2023
+
 Apprentissages:
   - Surtout aspect tests de montée en charge, profiling, et optimisation
   - k6 bon outil à connaître, bcp utilisé
 -->
+
 ---
 layout: two-cols
 class: no-subtitle
@@ -666,8 +671,8 @@ class: no-subtitle
 <!--
 Chance d'avoir travaillé sur un projet qui me passionne, c'était un plaisir d'ajouter petits à petits des fonctionnalités.
 
+Mettre en oeuvre les bonnes pratiques
 -->
-
 
 ---
 layout: two-cols
@@ -710,10 +715,10 @@ Ex: sélectionner la zone à modérer
 
 Stats, ex: 
 - nb de pixels placés par jour, heure, minute avec des graphiques de l’évolution
-— nb de pixels placés par utilisateur
-— nb de pixels placés en fonction de sa couleur
-— nb de pixels placés par zone, en réalisant une sorte d’"heat map" de la toile
-— Analyse des actions de modération, affichage par exemple des oeuvres qui ont dû être
+- nb de pixels placés par utilisateur
+- nb de pixels placés en fonction de sa couleur
+- nb de pixels placés par zone, en réalisant une sorte d’"heat map" de la toile
+- Analyse des actions de modération, affichage par exemple des oeuvres qui ont dû être
 supprimées.
 -->
 
