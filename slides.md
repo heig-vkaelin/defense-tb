@@ -512,10 +512,10 @@ layout: two-cols
 </div>
 
 * k6 pour les tests de montée en charge
-* Clinic.js pour le profiling (flame graph)
 * Métriques (avant que la latence soit `> 1.2s`):
   * Nombre d'utilisateurs virtuels
   * Nombre de pixels dessinés
+* Clinic.js pour le profiling (flame graph)
 
 <div class="mt-4 mb-2">
   <strong>Méthodologie</strong>
@@ -542,14 +542,14 @@ k6: permet de créer des tests en JS/TS
 Test créé: test websocket qui simule les événements d'un client et écoute les réponses
 Pas possible d'utiliser Socket.IO de base => module créé
 
-Clinic.js: 
-Plusieurs outils dispos mais utilisé le flame pour le profiling
-Faut lancer clinic puis lancer l'app, lancer les tests et ensuite stopper l'app pour avoir le graph
-
 Métriques:
 Breakpoint Test: crée des users virtuels qui se connectent et dessinent sur la toile (3 pixels chacun)
 Jusqu'à ce que la latence soit supérieure à 1.2s
 Latence: temps de la connexion WebSockets (temps avant de recevoir le board avec les pixels etc)
+
+Clinic.js: 
+Plusieurs outils dispos mais utilisé le flame pour le profiling
+Faut lancer clinic puis lancer l'app, lancer les tests et ensuite stopper l'app pour avoir le graph
 -->
 
 ---
@@ -661,8 +661,8 @@ class: no-subtitle
 **Organisationnel**
 
 * Travail seul sur un projet mais au sein d'une équipe 
-* Review du code bénéfique, permet d'améliorer la qualité
 * Bonnes pratiques du monde professionnel (daily meeting, sprint review, ...)
+* Review du code bénéfique, permet d'améliorer la qualité
 
 ::right::
 
