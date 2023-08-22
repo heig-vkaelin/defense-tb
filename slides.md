@@ -451,9 +451,9 @@ class: no-subtitle
 <br>
 <br>
 
-<v-clicks at="0">
+<v-clicks depth="2">
   <div>
-    <strong v-click>Événements Socket.IO</strong>
+    <strong>Événements Socket.IO</strong>
     <img src="/backend-animation/1.png" class="absolute"/>
   </div>
   <img src="/backend-animation/2.png" class="absolute"/>
@@ -550,7 +550,7 @@ Faut lancer clinic puis lancer l'app, lancer les tests et ensuite stopper l'app 
 
 # Méthodologie
 
-<v-clicks at="0">
+<v-clicks>
   <img src="/opti-animation/1.png" class="absolute h-[82%] -mt-4"/>
   <img src="/opti-animation/2.png" class="absolute h-[82%] -mt-4"/>
   <img src="/opti-animation/3.png" class="absolute h-[82%] -mt-4"/>
