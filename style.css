@@ -36,3 +36,7 @@ ul {
 code:before, code:after {
   content: '\00a0 ' !important;
 }
+
+.image-right-center-left + div {
+  background-position: right center !important;
+}

@@ -34,14 +34,16 @@ layout: two-cols
 # Sommaire
 
 <br>
-<br>
 
-- Contexte
-- Problématique
-- Solution et contraintes
-- Conception et réalisation
-- Conclusion
-- Démonstration
+Contexte
+
+Problématique
+
+Solution et contraintes
+
+Conception et réalisation
+
+Conclusion
 
 ::right::
 
@@ -86,6 +88,7 @@ TB réalisé pour l'Assoc Baleinev
 PMW: permet aux festivaliers de dessiner en temps réel sur les murs de l'école. / Collaboration
 
 BeeScreens: 
+- J'ai rejoint l'équipe en 2022
 - Volonté d'utiliser des technologies modernes
 - Ajout d'une nouvelle app le plus simple possible -> idée de ce TB
 -->
@@ -138,7 +141,8 @@ background: baleinev-2023.png
 # Solution et contraintes
 
 ---
-layout: two-cols
+layout: image-right
+image: rplace.png
 class: no-subtitle col-padding
 ---
 
@@ -154,16 +158,11 @@ Toile partagée par des millions d'utilisateurs
 
 Encourage la collaboration
 
-Occasionnel pendant une courte période (2017, 2022 et 2023) ⇒ forte rivalité
+Occasionnel (2017, 2022 et 2023) ⇒ forte rivalité
 
 <br>
 
 **↳ S'inspirer de r/place pour créer sa variante open source : BeePlace**
-
-::right::
-
-<img src="/rplace.png" class=""/>
-<p class="text-sm">Résultat du r/place de 2022</p>
 
 <!--
 Solution: s'inspirer du concept de r/place de Reddit
@@ -172,24 +171,28 @@ Reddit: plus grand forum au monde
 
 Utilisateurs peuvent choisir la couleur parmis une palette définie
 
+Image: Résultat du r/place de 2022
+
+Occasionnel, pendant une courte période
+
 Avantage:
 Même si l'utilisateur veut dessiner qqch d'inapproprié, cela lui prend du temps.
 Si on modère, il perd son temps et doit tout recommencer.
 -->
 
 ---
-layout: two-cols
-class: no-subtitle
+layout: image-right
+image: heig-screens.png
+class: no-subtitle image-right-center-left col-padding
 ---
 
 # Contexte physique
 
 **Les festivaliers**
 
-* Festivaliers utilisent leur propre matériel 
-* ⇒ Utilisée principalement sur smartphone
-* Optimisation pour ce médium
-* (Taille écran, utilisation tactile, etc.)
+* Festivaliers utilisent leur smartphone 
+* Utilisent leur propre connexion internet
+* ↳ Optimisation pour ce médium
 
 <br>
 
@@ -199,10 +202,15 @@ class: no-subtitle
 * Mode affichage nécessaire
 * Séparer l'affichage entre plusieurs écrans
 
-::right::
+<br>
 
-<img src="/heig-screens.png" class=""/>
-<p class="text-sm text-gray-700 dark:text-gray-300 italic">Crédits: Kevin Pradervand</p>
+**↳ Web app optimisée pour le desktop et le mobile**
+
+<!--
+Optimisation pour mobile: (Taille écran, utilisation tactile, etc.)
+
+Desktop: mode affichage
+-->
 
 ---
 layout: two-cols
@@ -210,7 +218,7 @@ class: no-subtitle
 ---
 
 <h1 class="whitespace-nowrap">
-  Garantir le fonctionnement de l’application <br>lors du festival
+  Garantir le fonctionnement de l’application
 </h1>
 
 Assurer la scalabilité
@@ -225,15 +233,17 @@ Pics de fréquentation lors du festival
 
 **Ordre de grandeur**
 
-| Reddit                        | Baleinev Festival |
-|-------------------------------|-------------------|
-| 10.5 millions de participants | 1500 festivaliers |
+| Reddit            | 10.5 millions de participants |
+|-------------------|-------------------------------|
+| Baleinev Festival | 1500 festivaliers             |
 
 ::right::
 
 <img src="/undraw_stepping_up.png" class="mt-20 absolute -right-12"/>
 
 <!--
+Garantir le fonctionnement de l’application lors du festival
+
 Latence faible: assurer une bonne expérience utilisateur
 
 1500 festivaliers max => pouvoir tenir au minimum plusieurs centaines d'utilisateurs simultanés
@@ -370,14 +380,6 @@ class: no-subtitle
 
 # Stockage
 
-**3 niveaux de stockage**
-
-1. Dans la mémoire de l'application
-2. Bitfield Redis
-3. Base de données PostgreSQL
-
-<div class="spacer"/>
-
 **Quoi stocker ?**
 
 La position et la couleur de chaque pixel
@@ -390,19 +392,26 @@ Permet de ne stocker que la couleur
 
 La position est implicite
 
+<div class="spacer"/>
+
+**3 niveaux de stockage**
+
+1. Dans la mémoire de l'application
+2. Bitfield Redis
+3. Base de données PostgreSQL
+
 ::right::
 
-Structure du Bitfield Redis:
+**Structure du Bitfield Redis**
 
 <img src="/bitfield-redis.png"/>
 
 <p class="text-sm text-gray-700 dark:text-gray-300 italic !mt-0">Crédits: Daniel Ellis (Reddit)</p>
 
-Structure SQL:
+**Structure SQL**
 <img src="/sql-pixels-table.png" class="w-55"/>
 
 <!--
-
 Bitfield Redis: parler du schéma
 
 Pourquoi aussi en mémoire ? Profling: bitfield (string) -> tableau JS couteux
@@ -420,7 +429,7 @@ class: no-subtitle
 
 # Backend
 
-**Nest.js**
+**NestJS**
 
 * Architecture DDD
 * ORM Prisma (PostgreSQL)
@@ -432,7 +441,7 @@ class: no-subtitle
 
 * Endpoints HTTP protégés (stratégie d'API Key)
 * Actions:
-  * Read only
+  * Lecture seule
   * Remise à zéro de la toile
   * Recouvrir une zone de pixels
 
@@ -442,16 +451,15 @@ class: no-subtitle
 <br>
 <br>
 
-**Événements Socket.IO**
-
-<div class="">
-  <img src="/backend-animation/1.png" class="absolute"/>
-  <v-clicks>
-    <img src="/backend-animation/2.png" class="absolute"/>
-    <img src="/backend-animation/3.png" class="absolute"/>
-    <img src="/backend-animation/4.png" class="absolute"/>
-  </v-clicks>
-</div>
+<v-clicks at="0">
+  <div>
+    <strong v-click>Événements Socket.IO</strong>
+    <img src="/backend-animation/1.png" class="absolute"/>
+  </div>
+  <img src="/backend-animation/2.png" class="absolute"/>
+  <img src="/backend-animation/3.png" class="absolute"/>
+  <img src="/backend-animation/4.png" class="absolute"/>
+</v-clicks>
 
 <!--
 DDD: Domain Driven Design, découpage par domaine
@@ -482,28 +490,27 @@ layout: two-cols
 <br>
 
 **Design**
-* Utilisation de TailwindCSS
+* Utilisation de Tailwind CSS
 
 ::right::
 
 <img src="/screenshot-app.png" class="w-90 absolute right-0 -top-8"/>
 
 <!--
-State global: Zustand
-
-TailwindCSS: utilitaire de classes CSS (design system)
+Tailwind CSS: utilitaire de classes CSS (design system)
 Pas bcp de design à faire donc tout custom
 
-Parler de l'interface avec le screen
+Démo de l'interface avec le screen
 -->
 
 ---
 layout: two-cols
+class: no-subtitle
 ---
 
 # Montée en charge
 
-<div class="flex items-baseline space-x-8 mb-2 -mt-3">
+<div class="flex items-baseline space-x-8 mb-4">
   <strong>Outils utilisés</strong>
   <div class="flex items-baseline space-x-3">
     <img src="/logos/k6.png" class="w-12"/>
@@ -517,18 +524,6 @@ layout: two-cols
   * Nombre de pixels dessinés
 * Clinic.js pour le profiling (flame graph)
 
-<div class="mt-4 mb-2">
-  <strong>Méthodologie</strong>
-</div>
-
-  1. Récupérer les résultats avant optimisations
-  2. Optimiser avec Clinic.js localement
-  3. Déployer sur la machine virtuelle de l’école
-  4. Lancer les tests avec k6
-  5. Comparer les résultats des tests avec les initiaux
-
-<br>
-
 ::right::
 
 <img src="/k6-report.png" class="-mt-6 rounded-lg"/>
@@ -540,7 +535,6 @@ Déployée sur une seconde VM de l'école pour les tests
 
 k6: permet de créer des tests en JS/TS
 Test créé: test websocket qui simule les événements d'un client et écoute les réponses
-Pas possible d'utiliser Socket.IO de base => module créé
 
 Métriques:
 Breakpoint Test: crée des users virtuels qui se connectent et dessinent sur la toile (3 pixels chacun)
@@ -550,6 +544,29 @@ Latence: temps de la connexion WebSockets (temps avant de recevoir le board avec
 Clinic.js: 
 Plusieurs outils dispos mais utilisé le flame pour le profiling
 Faut lancer clinic puis lancer l'app, lancer les tests et ensuite stopper l'app pour avoir le graph
+-->
+
+---
+
+# Méthodologie
+
+<v-clicks at="0">
+  <img src="/opti-animation/1.png" class="absolute h-[82%] -mt-4"/>
+  <img src="/opti-animation/2.png" class="absolute h-[82%] -mt-4"/>
+  <img src="/opti-animation/3.png" class="absolute h-[82%] -mt-4"/>
+  <img src="/opti-animation/4.png" class="absolute h-[82%] -mt-4"/>
+  <img src="/opti-animation/5.png" class="absolute h-[82%] -mt-4"/>
+  <img src="/opti-animation/6.png" class="absolute right-0 w-[30%] mt-38 mr-14"/>
+</v-clicks>
+
+
+<!--
+1. Déployer BeePlacer sur la machine virtuelle de l'école (spécialement pour les tests)
+2. Lancer les tests pour récupérer les résultats avant optimisations
+3. Optimiser avec Clinic.js localement
+4. Re-déployer sur la VM
+5. Lancer les tests avec k6
+6. Comparer les résultats des tests avec les initiaux
 -->
 
 ---
@@ -643,6 +660,17 @@ Objectifs vérifiés: grâce au test réalisé lors du Baleinev 2023
 Apprentissages:
   - Surtout aspect tests de montée en charge, profiling, et optimisation
   - k6 bon outil à connaître, bcp utilisé
+
+Tests unitaires et d'intégration:
+- Gros morceau, a été décidé par rapport au cahier des charges initial que c’était pas sur ça qu’on voulait investir autant de temps mais plutôt sur la montée en charge.
+- Montée en charge sert également à valider le fonctionnement de l'app
+
+Eléments + compliqués:
+- k6 pas possible d'utiliser Socket.IO de base => module créé
+- TS avec k6
+- tests de montée en charge dans leur ensemble
+- package commun
+- pinchzoom
 -->
 
 ---
@@ -725,11 +753,14 @@ supprimées.
 ---
 layout: iframe-right
 url: https://place.beescreens.ch/
+class:  no-subtitle
 ---
 
-# Démonstration
+<h1 class="whitespace-nowrap">
+  Merci de votre attention !
+</h1>
 
-<br>
+<div class="spacer"/>
 
 À vos pixels !
 
@@ -737,14 +768,11 @@ url: https://place.beescreens.ch/
 
 <img src="/qrcode.png" class="w-[250px] mx-auto mt-8"/>
 
----
-layout: cover
-background: baleinev-2023.png
----
+<!--
+En ce qui me concerne j’ai fini la présentation ici.
 
-# Merci de votre attention !
-<br>
-Avez-vous des questions ?
+Je vous laisse tester l'application si vous avez envie et je répondrai à vos questions avec plaisir.
+-->
 
 ---
 layout: two-cols
