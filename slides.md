@@ -190,9 +190,9 @@ class: no-subtitle image-right-center-left col-padding
 
 **Les festivaliers**
 
-* Festivaliers utilisent leur smartphone 
+* Festivaliers utilisent leur smartphone  
+↳ Optimisation pour ce médium
 * Utilisent leur propre connexion internet
-* ↳ Optimisation pour ce médium
 
 <br>
 
@@ -531,8 +531,6 @@ class: no-subtitle
 <img src="/appendix/flame3-getBoard.png" class="mt-4 rounded-lg"/>
 
 <!--
-Déployée sur une seconde VM de l'école pour les tests
-
 k6: permet de créer des tests en JS/TS
 Test créé: test websocket qui simule les événements d'un client et écoute les réponses
 
@@ -558,12 +556,11 @@ Faut lancer clinic puis lancer l'app, lancer les tests et ensuite stopper l'app 
   <img src="/opti-animation/5.png" class="absolute h-[78%] -mt-4"/>
 </v-clicks>
 
-
 <!--
 1. Déployer BeePlacer sur la machine virtuelle de l'école (spécialement pour les tests)
 2. Lancer les tests pour récupérer les résultats avant optimisations
 3. Optimiser avec Clinic.js localement
-4. Re-déployer sur la VM
+4. Recommence: Re-déployer sur la VM
 5. Lancer les tests avec k6
 6. Comparer les résultats des tests avec les initiaux
 -->
@@ -661,7 +658,7 @@ Apprentissages:
   - k6 bon outil à connaître, bcp utilisé
 
 Tests unitaires et d'intégration:
-- Gros morceau, a été décidé par rapport au cahier des charges initial que c’était pas sur ça qu’on voulait investir autant de temps mais plutôt sur la montée en charge.
+- Gros morceau, a été décidé par rapport au cahier des charges initial que c’était pas sur cette problématique qu’on voulait investir autant de temps mais plutôt sur la montée en charge.
 - Montée en charge sert également à valider le fonctionnement de l'app
 
 Eléments + compliqués:
