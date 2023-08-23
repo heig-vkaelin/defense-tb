@@ -549,11 +549,12 @@ Faut lancer clinic puis lancer l'app, lancer les tests et ensuite stopper l'app 
 # Méthodologie
 
 <v-clicks>
-  <img src="/opti-animation/1.png" class="absolute h-[78%] -mt-4"/>
-  <img src="/opti-animation/2.png" class="absolute h-[78%] -mt-4"/>
-  <img src="/opti-animation/3.png" class="absolute h-[78%] -mt-4"/>
-  <img src="/opti-animation/4.png" class="absolute h-[78%] -mt-4"/>
-  <img src="/opti-animation/5.png" class="absolute h-[78%] -mt-4"/>
+  <img src="/opti-animation/1.png" class="absolute h-[90%] -mt-4"/>
+  <img src="/opti-animation/2.png" class="absolute h-[90%] -mt-4"/>
+  <img src="/opti-animation/3.png" class="absolute h-[90%] -mt-4"/>
+  <img src="/opti-animation/4.png" class="absolute h-[90%] -mt-4"/>
+  <img src="/opti-animation/5.png" class="absolute h-[90%] -mt-4"/>
+  <img src="/opti-animation/6.png" class="absolute h-[90%] -mt-4"/>
 </v-clicks>
 
 <!--
