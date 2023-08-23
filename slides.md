@@ -78,7 +78,7 @@ class: col-padding no-subtitle
 * Application de dessin collaboratif
 
 **Depuis 2018**
-* BeeScreens: nouvelle version open source
+* BeeScreens : nouvelle version open source
 * Collection d'applications interactives
 * Cadre pouvant sortir du festival
 
@@ -116,7 +116,7 @@ Modération difficile et chronophage
 
 <div class="spacer"/>
 
-Affecte les autres utilisateurs: gâche les dessins
+Affecte les autres utilisateurs : gâche les dessins
 
 <br>
 <br>
@@ -440,7 +440,7 @@ class: no-subtitle
 **Administration**
 
 * Endpoints HTTP protégés (stratégie d'API Key)
-* Actions:
+* Actions :
   * Lecture seule
   * Remise à zéro de la toile
   * Recouvrir une zone de pixels
@@ -482,7 +482,7 @@ layout: two-cols
 
 **Next.js**
 
-* Communication: se greffe aux WebSockets du Backend avec Socket.IO
+* Communication : se greffe aux WebSockets du Backend avec Socket.IO
 * Stockage de l'état dans un state global
 * PinchZoom du canvas
 * Mode affichage
@@ -622,7 +622,7 @@ class: no-subtitle
 
 <br>
 
-**Objectifs accomplis (Baleinev 2023)**
+**Objectifs atteints (Baleinev 2023)**
 
 * Moins de débordements
 * Plus de collaboration
@@ -652,7 +652,7 @@ Fonctionnalités non prévues:
   - Package pour partager le code
   - Historique dans la base de données SQL
 
-Objectifs vérifiés: grâce au test réalisé lors du Baleinev 2023
+Vérifier que objectifs atteints: grâce au test réalisé lors du Baleinev 2023
 
 Apprentissages:
   - Surtout aspect tests de montée en charge, profiling, et optimisation
@@ -780,8 +780,8 @@ layout: two-cols
 <br>
 <br>
 
-* Photos: Antoine Kaelin & Kevin Pradervand
-* Illustrations: unDraw
+* Photos : Antoine Kaelin & Kevin Pradervand
+* Illustrations : unDraw
 
 ::right::
 
