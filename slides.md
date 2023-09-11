@@ -2,6 +2,7 @@
 theme: seriph
 background: baleinev-2023.png
 class: homepage
+colorSchema: light
 highlighter: shiki
 lineNumbers: false
 info: |
